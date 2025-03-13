@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import './dropDownMenu.css'
 
 function DropDownMenu({ isOpen, onClose }) {
   const navigate = useNavigate()
+  const menuRef = useRef(null)
 
   // Check if the user is authenticated via token
   const isLoggedIn = Boolean(localStorage.getItem('token'))
@@ -14,8 +15,25 @@ function DropDownMenu({ isOpen, onClose }) {
     navigate('/') // Redirect to the homepage
   }
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen, onClose])
+
   return (
-    <div className={`dropdown-menu ${isOpen ? 'open' : ''}`}>
+    <div ref={menuRef} className={`dropdown-menu ${isOpen ? 'open' : ''}`}>
       <ul>
         <li>
           <NavLink to='/' onClick={onClose}>
