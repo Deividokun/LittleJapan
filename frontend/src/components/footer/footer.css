@@ -1,0 +1,42 @@
+footer {
+  background-color: rgba(225, 225, 225, 1);
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+.titleNav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+nav {
+  width: 70%;
+}
+.titleNav ul {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.titleNav ul li {
+  list-style: none;
+  cursor: pointer;
+}
+footer p {
+  margin: 0;
+}
+.titleNav h2 {
+  font-size: 1rem;
+  margin-left: 1.25rem;
+}
+.kanji {
+  color: red;
+}

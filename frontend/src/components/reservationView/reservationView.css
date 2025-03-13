@@ -1,0 +1,93 @@
+/* Estilos básicos para el componente */
+.reserva-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.reserved-date {
+  background-color: red !important; /* Puedes cambiar el color a tu preferencia */
+  color: white !important;
+  pointer-events: none; /* Esto evitará que se puedan seleccionar las fechas reservadas */
+}
+
+.reserva-container p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.date-picker-container {
+  margin: 20px 0;
+}
+
+.date-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.date-picker-wrapper span {
+  font-size: 18px;
+}
+
+.total-price {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+label {
+  display: flex;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Estilos para el botón */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(244, 2, 147, 1);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.error-alarm {
+  margin-top: 10px;
+  color: #f44336;
+  background-color: #ffe6e6;
+  padding: 10px;
+  border: 1px solid #f44336;
+  border-radius: 5px;
+  text-align: center;
+}
+
+button:hover {
+  background-color: rgba(244, 2, 147, 1);
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: rgba(244, 2, 147, 1);
+}
+
+button:focus {
+  outline: none;
+}

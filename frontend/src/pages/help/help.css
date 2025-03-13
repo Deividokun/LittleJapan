@@ -1,0 +1,57 @@
+.help-section {
+  line-height: 1.6;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.help-section h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.help-section h3 {
+  font-size: 1.5rem;
+  color: #555;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.help-section p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.help-section ul {
+  margin-left: 20px;
+  padding-left: 20px;
+}
+
+.help-section ul li {
+  list-style: disc;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.help-section strong {
+  color: #000;
+  font-weight: bold;
+}
+
+.help-section .support {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-left: 4px solid #007bff;
+  margin-top: 20px;
+}
+
+.help-section .guides ul li {
+  margin-bottom: 15px;
+  list-style: none;
+}
+
+.help-section .guides ul li strong {
+  color: #007bff;
+}

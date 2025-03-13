@@ -1,0 +1,113 @@
+/* Estilos generales del formulario */
+.RegisterHouseForm {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 3.75rem;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Define dos columnas */
+  gap: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: visible;
+}
+
+/* Estilo para cada contenedor de input */
+.RegisterHouseForm div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Hacer que los inputs ocupen una sola columna por defecto */
+.RegisterHouseForm input,
+.RegisterHouseForm select,
+.RegisterHouseForm textarea {
+  grid-column: span 1; /* Ocupan una columna por defecto */
+}
+
+/* La descripción y los servicios ocupan una fila juntos */
+.RegisterHouseForm .description,
+.RegisterHouseForm .services {
+  grid-column: span 2; /* Ocupan las dos columnas */
+  display: flex;
+  gap: 20px; /* Separación entre los dos elementos */
+}
+
+/* Estilo para labels */
+.RegisterHouseForm label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Estilo para inputs, selects y textareas */
+.RegisterHouseForm input,
+.RegisterHouseForm select,
+.RegisterHouseForm textarea {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.RegisterHouseForm input:focus,
+.RegisterHouseForm select:focus,
+.RegisterHouseForm textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botón de envío ocupa las dos columnas */
+.RegisterHouseForm button {
+  grid-column: span 2; /* Botón ocupa toda la fila */
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(244, 2, 147, 1);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.RegisterHouseForm button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+.RegisterHouseForm button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.selectone {
+  z-index: 500000;
+}
+/* Estilos globales para evitar solapamientos */
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .RegisterHouseForm {
+    grid-template-columns: 1fr; /* Cambia a una columna en pantallas pequeñas */
+  }
+
+  .RegisterHouseForm .description,
+  .RegisterHouseForm .services {
+    flex-direction: column; /* Cambiar a disposición vertical */
+    gap: 10px;
+    grid-column: span 1; /* Ocupan solo una columna en móviles */
+    z-index: 5000;
+  }
+
+  .RegisterHouseForm button {
+    grid-column: span 1; /* Botón ocupa una columna en móviles */
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+}

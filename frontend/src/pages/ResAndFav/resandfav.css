@@ -1,0 +1,80 @@
+h2 {
+  color: #222;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.reservations ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.liReserv {
+  width: 25rem;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  flex: 1 1 calc(33.333% - 20px);
+}
+
+.liReserv:hover {
+  transform: translateY(-5px);
+}
+
+.reservation-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.reservation-info {
+  flex: 1;
+}
+
+h3 {
+  margin: 0 0 10px;
+  color: #000000;
+  font-size: 20px;
+}
+
+p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+strong {
+  color: #000;
+}
+.reservation-image {
+  flex-shrink: 0;
+  height: 100%; /* Asegúrate de que el contenedor de la imagen tenga una altura definida o heredada */
+}
+
+.reservation-image img {
+  width: 180px; /* O el ancho que prefieras */
+  height: 12.4375rem; /* Esto hará que la imagen ocupe el 100% de la altura del contenedor .reservation-image */
+  border-radius: 8px;
+  object-fit: cover; /* Esto asegura que la imagen cubra todo el espacio sin deformarse, recortando si es necesario */
+}
+
+.delete-btn {
+  background-color: #f68282;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.delete-btn:hover {
+  background-color: #f42b2b;
+}

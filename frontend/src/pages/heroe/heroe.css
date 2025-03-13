@@ -1,0 +1,168 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Contenedor principal */
+.container-heroe {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Sección */
+section {
+  padding: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+  transform: translateY(-5px);
+}
+
+/* Artículos */
+article {
+  margin-bottom: 1rem;
+}
+
+article h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+/* Imágenes generales */
+article img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover para imágenes generales */
+article img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Contenedor de la imagen con título */
+.image-container {
+  position: relative;
+  width: 48%;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.image-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* Ajustes para "Destinos populares en Japón" */
+.sectionHeroeTwo article:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Alinea las imágenes de manera equidistante */
+  gap: 1rem;
+}
+
+.sectionHeroeTwo article:last-child .image-container {
+  flex: 0 0 calc(50% - 1rem); /* Las primeras 2 imágenes ocupan 50% del contenedor */
+}
+
+.sectionHeroeTwo article:last-child img {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.sectionHeroeTwo article:last-child img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+/* Las imágenes de abajo ocupan el 33% del contenedor */
+.sectionHeroeTwo article:last-child .image-container:nth-child(n + 3) {
+  flex: 0 0 calc(33.33% - 1rem); /* Las imágenes de abajo ocupan el 33% del espacio */
+}
+
+.sectionHeroeTwo article:last-child img:nth-child(n + 3) {
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.sectionHeroeTwo article:last-child img:nth-child(n + 3):hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+/* Ajustes para "Busca por tipo de alojamiento" */
+.sectionHeroeThree article:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3em;
+  justify-content: space-between;
+}
+
+/* Contenedor de la imagen con título para tipo de alojamiento */
+.sectionHeroeThree article:last-child .image-container {
+  position: relative;
+  flex: 1 1 calc(30% - 1rem);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sectionHeroeThree article:last-child img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Título sobre las imágenes */
+.sectionHeroeThree article:last-child .image-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Sombras para mejor legibilidad */
+}
+
+.sectionHeroeThree article:last-child img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+/* Estilos para la primera imagen */
+section:first-child article img {
+  width: 100%;
+  height: 400px; /* Establece una altura más baja para hacer la imagen más alargada */
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsión */
+  border-radius: 90px;
+}
