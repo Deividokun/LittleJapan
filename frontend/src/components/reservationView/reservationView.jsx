@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css' // Import styles from react-datepicker
 import { useNavigate } from 'react-router-dom'
@@ -11,9 +11,33 @@ function ReservaView({ nochesAlojamiento, huespedes }) {
   const [totalPrice, setTotalPrice] = useState(0) // Total price
   const [reserveConfirmed, setReserveConfirmed] = useState(false) // To trigger the alarm
   const [errorAlarm, setErrorAlarm] = useState(false) // To show the alarm if not logged in
+  const [reservedDates, setReservedDates] = useState([]) // Reserved dates
   const navigate = useNavigate() // To redirect to Home
 
   const Cleaningfee = 17
+
+  useEffect(() => {
+    // Fetch reserved dates from the backend
+    const fetchReservedDates = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/reserves/dates')
+        const data = await response.json()
+        if (response.ok) {
+          const dates = data.map((reservation) => ({
+            start: new Date(reservation.startDate),
+            end: new Date(reservation.endDate)
+          }))
+          setReservedDates(dates)
+        } else {
+          console.error('Error fetching reserved dates:', data.error)
+        }
+      } catch (error) {
+        console.error('Error fetching reserved dates:', error)
+      }
+    }
+
+    fetchReservedDates()
+  }, [])
 
   const calculateTotalPrice = () => {
     if (startDate && endDate) {
@@ -33,7 +57,7 @@ function ReservaView({ nochesAlojamiento, huespedes }) {
   }
 
   // Call the function when the dates change
-  React.useEffect(() => {
+  useEffect(() => {
     calculateTotalPrice()
   }, [startDate, endDate])
 
@@ -117,6 +141,9 @@ function ReservaView({ nochesAlojamiento, huespedes }) {
             endDate={endDate}
             placeholderText='Start date'
             dateFormat='dd/MM/yyyy'
+            highlightDates={reservedDates.map((date) => ({
+              'react-datepicker__day--highlighted': date.start
+            }))}
           />
 
           <DatePicker
@@ -128,6 +155,9 @@ function ReservaView({ nochesAlojamiento, huespedes }) {
             minDate={startDate}
             placeholderText='End date'
             dateFormat='dd/MM/yyyy'
+            highlightDates={reservedDates.map((date) => ({
+              'react-datepicker__day--highlighted': date.end
+            }))}
           />
         </div>
       </div>
