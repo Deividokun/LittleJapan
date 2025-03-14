@@ -26,36 +26,86 @@ function FilterHome() {
     )
   }
 
+  // Paginación
+  const [currentPage, setCurrentPage] = useState(1)
+  const accommodationsPerPage = 10
+
+  // Obtener alojamientos actuales
+  const indexOfLastAccommodation = currentPage * accommodationsPerPage
+  const indexOfFirstAccommodation =
+    indexOfLastAccommodation - accommodationsPerPage
+  const currentAccommodations = resultados.slice(
+    indexOfFirstAccommodation,
+    indexOfLastAccommodation
+  )
+
+  // Cambiar página
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
+  const nextPage = () => {
+    if (currentPage < Math.ceil(resultados.length / accommodationsPerPage)) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
   return (
     <div className='results-container'>
       <h2>Filter Results:</h2>
       {resultados.length === 0 ? (
         <p>No accommodations match the selected filters.</p>
       ) : (
-        <div className='results-grid'>
-          {resultados.map((accommodation) => (
-            <NavLink
-              to={`/detail/${accommodation.id}`}
-              className='card-accommodation'
-              key={accommodation.id}
-            >
-              <div className='card-image'>
-                <img src={accommodation.image} alt={accommodation.name} />
-                <div
-                  className='heart-icon'
-                  onClick={(e) => toggleFavorite(accommodation.id, e)}
-                >
-                  {favorites.includes(accommodation.id) ? '❤️' : '🤍'}
+        <div>
+          <div className='results-grid'>
+            {currentAccommodations.map((accommodation) => (
+              <NavLink
+                to={`/detail/${accommodation.id}`}
+                className='card-accommodation'
+                key={accommodation.id}
+              >
+                <div className='card-image'>
+                  <img src={accommodation.image} alt={accommodation.name} />
+                  <div
+                    className='heart-icon'
+                    onClick={(e) => toggleFavorite(accommodation.id, e)}
+                  >
+                    {favorites.includes(accommodation.id) ? '❤️' : '🤍'}
+                  </div>
                 </div>
-              </div>
-              <div className='card-content'>
-                <h3>{accommodation.name}</h3>
-                <p className='description'>{accommodation.description}</p>
-                <p>Price: ${accommodation.pricePerNight}/night</p>
-                <p>Guests: {accommodation.guests}</p>
-              </div>
-            </NavLink>
-          ))}
+                <div className='card-content'>
+                  <h3>{accommodation.name}</h3>
+                  <p className='description'>{accommodation.description}</p>
+                  <p>Price: ${accommodation.pricePerNight}/night</p>
+                  <p>Guests: {accommodation.guests}</p>
+                </div>
+              </NavLink>
+            ))}
+          </div>
+          <div className='pagination'>
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className='prev'
+            >
+              &laquo; Previous
+            </button>
+            <span>{currentPage}</span>
+            <button
+              onClick={nextPage}
+              disabled={
+                currentPage ===
+                Math.ceil(resultados.length / accommodationsPerPage)
+              }
+              className='next'
+            >
+              Next &raquo;
+            </button>
+          </div>
         </div>
       )}
     </div>
