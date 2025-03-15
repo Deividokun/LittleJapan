@@ -6,14 +6,13 @@ import './register.css'
 function RegisterUser() {
   const navigate = useNavigate()
   const { state, handleChange, handleSubmit } = useRegisterForm(navigate)
-  const { formData, loading, error, success } = state
 
   return (
     <div className='register-container'>
       <form onSubmit={handleSubmit} className='register-form'>
         <h2>User Registration</h2>
-        {error && <p className='error'>{error}</p>}
-        {success && (
+        {state.error && <p className='error'>{state.error}</p>}
+        {state.success && (
           <p className='success'>Registration successful. Redirecting...</p>
         )}
 
@@ -23,9 +22,10 @@ function RegisterUser() {
             type='text'
             id='nombreUsuario'
             name='name'
-            value={formData.name}
+            value={state.formData.name || ''}
             onChange={handleChange}
             required
+            autoComplete='username'
           />
         </div>
 
@@ -35,9 +35,10 @@ function RegisterUser() {
             type='password'
             id='contrasena'
             name='password'
-            value={formData.password}
+            value={state.formData.password || ''}
             onChange={handleChange}
             required
+            autoComplete='current-password'
           />
         </div>
 
@@ -47,9 +48,10 @@ function RegisterUser() {
             type='text'
             id='nombreCompleto'
             name='fullName'
-            value={formData.fullName}
+            value={state.formData.fullName || ''}
             onChange={handleChange}
             required
+            autoComplete='name'
           />
         </div>
 
@@ -59,8 +61,9 @@ function RegisterUser() {
             type='number'
             id='experiencia'
             name='experience'
-            value={formData.experience}
+            value={state.formData.experience || ''}
             onChange={handleChange}
+            autoComplete='off'
           />
         </div>
 
@@ -70,10 +73,11 @@ function RegisterUser() {
             type='text'
             id='imagenUsuario'
             name='image'
-            value={formData.image}
+            value={state.formData.image || ''}
             onChange={handleChange}
             placeholder='Enter image URL'
             required
+            autoComplete='off'
           />
         </div>
 
@@ -83,9 +87,10 @@ function RegisterUser() {
             type='text'
             id='numeroDocumento'
             name='document_number'
-            value={formData.document_number}
+            value={state.formData.document_number || ''}
             onChange={handleChange}
             required
+            autoComplete='off'
           />
         </div>
 
@@ -95,9 +100,10 @@ function RegisterUser() {
             type='text'
             id='telefono'
             name='telephone_number'
-            value={formData.telephone_number}
+            value={state.formData.telephone_number || ''}
             onChange={handleChange}
             required
+            autoComplete='tel'
           />
         </div>
 
@@ -107,9 +113,10 @@ function RegisterUser() {
             type='number'
             id='edad'
             name='age'
-            value={formData.age}
+            value={state.formData.age || ''}
             onChange={handleChange}
             required
+            autoComplete='off'
           />
         </div>
 
@@ -119,14 +126,19 @@ function RegisterUser() {
             type='email'
             id='email'
             name='Email'
-            value={formData.Email}
+            value={state.formData.Email || ''}
             onChange={handleChange}
             required
+            autoComplete='email'
           />
         </div>
 
-        <button type='submit' className='register-button' disabled={loading}>
-          {loading ? 'Loading...' : 'Register'}
+        <button
+          type='submit'
+          className='register-button'
+          disabled={state.loading}
+        >
+          {state.loading ? 'Loading...' : 'Register'}
         </button>
       </form>
     </div>
