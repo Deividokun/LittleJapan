@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express') //Se importa Express, un framework para crear servidores en Node.js.
 const cors = require('cors')
 const app = express()
 const userRoutes = require('./routes/userRoutes')
@@ -20,7 +20,7 @@ const corsOptions = {
 connectToDatabase()
   .then(() => {
     // Middleware
-    app.use(cors(corsOptions))
+    app.use(cors(corsOptions)) /// <--- Aquí se configura CORS para permitir solicitudes desde el puerto 5173
     app.use(express.json())
 
     // Rutas

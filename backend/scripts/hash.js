@@ -15,7 +15,11 @@ async function rehashPasswords() {
         const hashedPassword = await bcrypt.hash(user.password, 10)
         await sql.query`UPDATE Users SET password = ${hashedPassword} WHERE id = ${user.id}`
       }
-    }
+    } //e recorre cada usuario obtenido en result.recordset.
+    // Se verifica si la contraseña tiene menos de 60 caracteres.
+    // ¿Por qué 60?
+    // Los hashes generados por bcrypt en su formato estándar siempre tienen 60 caracteres o más.
+    // Si la longitud de la contraseña es menor, se asume que no está hasheada y debe ser protegida.
     console.log('Contraseñas rehasheadas correctamente.')
   } catch (error) {
     console.error('Error al rehashear las contraseñas:', error)

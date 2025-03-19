@@ -6,7 +6,7 @@ function FilterHome() {
   const location = useLocation()
   const resultados = Array.isArray(location.state?.resultados)
     ? location.state.resultados
-    : []
+    : [] // es una condicion que verifica si location.state.resultados es un array, si es asi, se asigna a resultados, si no, se asigna un array vacio.
 
   // Cargar favoritos desde localStorage
   const [favorites, setFavorites] = useState(
@@ -18,12 +18,12 @@ function FilterHome() {
   }, [favorites])
 
   const toggleFavorite = (id, event) => {
-    event.stopPropagation()
+    // event.stopPropagation()
     event.preventDefault() // Evita que el NavLink navegue al hacer clic en el corazón
 
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]
-    )
+    ) // se paa el id por parametro y se verifica si el id ya esta en el array de favoritos, si es asi se añade por spreed peraton que es un nuevo array, si no se elimina el id del array.
   }
 
   // Paginación
@@ -62,29 +62,33 @@ function FilterHome() {
       ) : (
         <div>
           <div className='results-grid'>
-            {currentAccommodations.map((accommodation) => (
-              <NavLink
-                to={`/detail/${accommodation.id}`}
-                className='card-accommodation'
-                key={accommodation.id}
-              >
-                <div className='card-image'>
-                  <img src={accommodation.image} alt={accommodation.name} />
-                  <div
-                    className='heart-icon'
-                    onClick={(e) => toggleFavorite(accommodation.id, e)}
-                  >
-                    {favorites.includes(accommodation.id) ? '❤️' : '🤍'}
+            {currentAccommodations.map(
+              (
+                accommodation // se recorre el array de alojamientos actuales y se muestra en pantalla.
+              ) => (
+                <NavLink
+                  to={`/detail/${accommodation.id}`}
+                  className='card-accommodation'
+                  key={accommodation.id}
+                >
+                  <div className='card-image'>
+                    <img src={accommodation.image} alt={accommodation.name} />
+                    <div
+                      className='heart-icon'
+                      onClick={(e) => toggleFavorite(accommodation.id, e)} // se pasa el id del alojamiento y el evento.
+                    >
+                      {favorites.includes(accommodation.id) ? '❤️' : '🤍'}
+                    </div>
                   </div>
-                </div>
-                <div className='card-content'>
-                  <h3>{accommodation.name}</h3>
-                  <p className='description'>{accommodation.description}</p>
-                  <p>Price: ${accommodation.pricePerNight}/night</p>
-                  <p>Guests: {accommodation.guests}</p>
-                </div>
-              </NavLink>
-            ))}
+                  <div className='card-content'>
+                    <h3>{accommodation.name}</h3>
+                    <p className='description'>{accommodation.description}</p>
+                    <p>Price: ${accommodation.pricePerNight}/night</p>
+                    <p>Guests: {accommodation.guests}</p>
+                  </div>
+                </NavLink>
+              )
+            )}
           </div>
           <div className='pagination'>
             <button

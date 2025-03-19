@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom' // Importamos el hook useNavigate de react-router-dom, que permite la navegación programática entre páginas.
 import './heroe.css'
 
 function Heroe() {
@@ -25,7 +25,7 @@ function Heroe() {
     try {
       const queryParams = new URLSearchParams(filterCriteria).toString()
       const token = localStorage.getItem('token')
-
+      //toma el filtercriteria que es el objeto que se pasa como argumento a la función handleNavigation y lo convierte en una cadena de consulta que se puede agregar a la URL.
       const response = await fetch(
         `http://localhost:3000/api/accommodations?${queryParams}`,
         {
@@ -41,7 +41,7 @@ function Heroe() {
         throw new Error(`HTTP error! Status: ${response.status}`)
       }
 
-      const resultados = await response.json()
+      const resultados = await response.json() //covuelve los resultados obtenidos del servidor
       console.log('Results filtered from the server:', resultados)
       navigate('/filterhome', { state: { resultados } })
     } catch (error) {
@@ -68,7 +68,7 @@ function Heroe() {
         <article>
           <div
             className='image-container'
-            onClick={(e) => handleNavigation({ ciudad: 'Tokyo' }, e)}
+            onClick={(e) => handleNavigation({ ciudad: 'Tokyo' }, e)} //le pasamos un objeto con la ciudad que queremos filtrar por medio de la función handleNavigation
           >
             <img src='/assets/lugaresHeroe/tokyo.jpg' alt='Tokyo' />
             <span className='image-title'>Tokyo 🎌</span>

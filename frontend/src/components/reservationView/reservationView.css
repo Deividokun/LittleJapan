@@ -91,3 +91,8 @@ button:active {
 button:focus {
   outline: none;
 }
+
+.react-datepicker__day--highlighted {
+  background-color: red;
+  color: white;
+}

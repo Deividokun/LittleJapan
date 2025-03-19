@@ -16,7 +16,7 @@ function LoginUser() {
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  } // vale actualizar en directo el estado del formulario con los datos introducidos por el usuario para mandarlo a las variables de estado formdata
 
   const handleSubmit = async (e) => {
     e.preventDefault()

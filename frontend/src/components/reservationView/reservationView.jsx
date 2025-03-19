@@ -16,28 +16,28 @@ function ReservaView({ nochesAlojamiento, huespedes }) {
 
   const Cleaningfee = 17
 
-  useEffect(() => {
-    // Fetch reserved dates from the backend
-    const fetchReservedDates = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/reserves/dates')
-        const data = await response.json()
-        if (response.ok) {
-          const dates = data.map((reservation) => ({
-            start: new Date(reservation.startDate),
-            end: new Date(reservation.endDate)
-          }))
-          setReservedDates(dates)
-        } else {
-          console.error('Error fetching reserved dates:', data.error)
-        }
-      } catch (error) {
-        console.error('Error fetching reserved dates:', error)
-      }
-    }
+  // useEffect(() => {
+  //   // Fetch reserved dates from the backend
+  //   const fetchReservedDates = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:3000/api/reserves/dates')
+  //       const data = await response.json()
+  //       if (response.ok) {
+  //         const dates = data.map((reservation) => ({
+  //           start: new Date(reservation.startDate),
+  //           end: new Date(reservation.endDate)
+  //         }))
+  //         setReservedDates(dates)
+  //       } else {
+  //         console.error('Error fetching reserved dates:', data.error)
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching reserved dates:', error)
+  //     }
+  //   }
 
-    fetchReservedDates()
-  }, [])
+  //   fetchReservedDates()
+  // }, [])
 
   const calculateTotalPrice = () => {
     if (startDate && endDate) {
@@ -80,7 +80,7 @@ function ReservaView({ nochesAlojamiento, huespedes }) {
     let usersid = localStorage.getItem('usersid') // Suponiendo que lo guardaste en localStorage
     if (!usersid) {
       try {
-        const tokenPayload = JSON.parse(atob(token.split('.')[1])) // Decodifica el payload del JWT
+        const tokenPayload = JSON.parse(atob(token.split('.')[1])) // Decodifica el payload del JWT (Base64) para ver su contenido y pasarlo a json osea cogiendo un token y decodificandolo para obetener la informacion que contiene en el caso que no existira el token userdId de cuando se hace la reerva del login
         usersid = tokenPayload.id // Ajusta esto según cómo está almacenado el id en tu token
       } catch (error) {
         console.error('Error al decodificar el token:', error)

@@ -4,7 +4,7 @@ const User = require('../models/User')
 
 async function getAccommodations(req, res) {
   try {
-    const { tipoAlojamiento, ciudad, precio, huespedes } = req.query
+    const { tipoAlojamiento, ciudad, precio, huespedes } = req.query //params -> query
 
     let query = `
       SELECT
@@ -17,10 +17,10 @@ async function getAccommodations(req, res) {
       FROM Accommodation A
       JOIN [Users] U ON A.ownerId = U.id
       LEFT JOIN Accommodation_Services AS ASR ON A.id = ASR.accommodation_id
-      LEFT JOIN Service S ON ASR.service_id = S.id
+      LEFT JOIN Service S ON ASR.service_id = S.id 
     `
 
-    const filters = []
+    const filters = [] // <-- Aquí se define filters para los filter de mi fronted y se almacena en un array
     const params = []
 
     if (tipoAlojamiento) {
@@ -51,8 +51,8 @@ async function getAccommodations(req, res) {
       query += ` WHERE ${filters.join(' AND ')}`
     }
 
-    const pool = await sql.connect()
-    const request = pool.request()
+    const pool = await sql.connect() // Conectar a la base de datos
+    const request = pool.request() // Crear una nueva solicitud
 
     params.forEach((param) => {
       request.input(param.name, param.type, param.value)
@@ -64,6 +64,7 @@ async function getAccommodations(req, res) {
     const accommodationMap = new Map() // <-- Aquí se define accommodationMap
 
     result.recordset.forEach((row) => {
+      // <-- Aquí se recorre el recordset y se almacena en accommodationMap
       if (!accommodationMap.has(row.id)) {
         accommodationMap.set(row.id, {
           id: row.id,
@@ -208,7 +209,7 @@ async function addAccommodation(req, res) {
   try {
     const pool = await sql.connect()
 
-    // Iniciar una transacción
+    // Iniciar una transacción para asegurar que todas las operaciones lleguen con seguirdad.
     const transaction = new sql.Transaction(pool)
     await transaction.begin()
 
@@ -228,7 +229,7 @@ async function addAccommodation(req, res) {
           'INSERT INTO Accommodation (type, ownerid, guests, city, pricepernight, image, name, description) OUTPUT INSERTED.id VALUES (@type, @ownerid, @guests, @city, @pricepernight, @image, @name, @description)'
         )
 
-      const accommodationId = result.recordset[0].id
+      const accommodationId = result.recordset[0].id // ID del alojamiento recién insertado es 0 porque es la primera fila
 
       // Insertamos las relaciones entre el alojamiento y los servicios
       if (services && services.length > 0) {
@@ -255,7 +256,7 @@ async function addAccommodation(req, res) {
         return regex.test(uuid)
       }
 
-      // Confirmar la transacción
+      // Confirmar la transacción y enviar
       await transaction.commit()
 
       res.status(201).send('Alojamiento creado correctamente')

@@ -88,7 +88,6 @@ async function loginUser(req, res) {
     res.status(500).json({ error: 'Error interno del servidor' })
   }
 }
-
 async function createUser(req, res) {
   const {
     name,
@@ -161,7 +160,6 @@ async function createUser(req, res) {
     res.status(500).json({ message: 'Error interno del servidor' })
   }
 }
-
 // Función para actualizar un usuario
 // Función para actualizar un usuario
 async function updateUser(req, res) {
