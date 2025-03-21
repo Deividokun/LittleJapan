@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './arrayiverse.css'
+import './array.css'
 function ArrayInverse() {
   const originalArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   const [array, setArray] = useState(originalArray)
@@ -47,4 +47,3 @@ function ArrayInverse() {
 }
 
 export default ArrayInverse
-//prueba test de arrayiverse

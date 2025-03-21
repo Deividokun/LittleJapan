@@ -6,7 +6,7 @@ import Footer from './components/footer/footer'
 import Header from './components/Header/Header'
 import ScrollToTop from './hooks/ScrollToTop' // Importamos ScrollToTop
 import AddAlojamientoForm from './pages/accommodationReg/accommodationReg'
-import ArrayInverse from './pages/array/arrayiverse'
+import ArrayInverse from './pages/array/array'
 import ContactUs from './pages/contactUs/contactUs'
 import FilterHome from './pages/filterHome/filterHome'
 import HelpComponent from './pages/help/help'
