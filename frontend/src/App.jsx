@@ -4,7 +4,7 @@ import './App.css'
 import Filter from './components/filter/filter'
 import Footer from './components/footer/footer'
 import Header from './components/Header/Header'
-import ScrollToTop from './hooks/ScrollToTop' // Importamos ScrollToTop
+import ScrollToTop from './hooks/ScrollToTop' // Importamos ScrollToTop para que la página siempre vuelva arriba al cambiar de ruta
 import AddAlojamientoForm from './pages/accommodationReg/accommodationReg'
 import ArrayInverse from './pages/array/array'
 import ContactUs from './pages/contactUs/contactUs'
