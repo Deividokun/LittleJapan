@@ -6,6 +6,7 @@ import Footer from './components/footer/footer'
 import Header from './components/Header/Header'
 import ScrollToTop from './hooks/ScrollToTop' // Importamos ScrollToTop
 import AddAlojamientoForm from './pages/accommodationReg/accommodationReg'
+import ArrayInverse from './pages/array/arrayiverse'
 import ContactUs from './pages/contactUs/contactUs'
 import FilterHome from './pages/filterHome/filterHome'
 import HelpComponent from './pages/help/help'
@@ -28,7 +29,8 @@ function App() {
     '/register',
     '/add-house',
     '/resandfav',
-    '/myProfile'
+    '/myProfile',
+    '/array'
   ]
   const isDetailPage = location.pathname.startsWith('/detail/')
 
@@ -52,6 +54,7 @@ function App() {
         <Route path='/add-house' element={<AddAlojamientoForm />} />
         <Route path='/myProfile' element={<MyProfile />} />
         <Route path='/reserves/:id' element={<ReservationDetail />} />
+        <Route path='/array' element={<ArrayInverse />} />
       </Routes>
       <Footer />
     </div>

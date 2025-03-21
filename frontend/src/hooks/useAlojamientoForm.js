@@ -6,7 +6,7 @@ const useAlojamientoForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (field, value) => {
-    dispatch({ type: 'UPDATE_FIELD', payload: { field, value } })
+    dispatch({ type: 'UPDATE_FIELD', payload: { field, value } }) // captura el campo y el valor  // actualiza el estado
   }
 
   const resetForm = () => {
