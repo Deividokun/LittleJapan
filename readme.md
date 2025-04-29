@@ -78,7 +78,7 @@ El proyecto sigue una arquitectura basada en componentes y servicios, separando 
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/LittleJapan.git
+   git clone  https://github.com/tu-usuario/LittleJapan
    cd LittleJapan
 
 Licencia
