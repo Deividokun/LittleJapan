@@ -7,13 +7,13 @@ import ServicesView from '../../components/servicesView/servicesView'
 import './hostingView.css'
 
 const HostingCard = () => {
-  const { id } = useParams() // se obtiene el id de los parametros de la url osea del alojamiento seleccionado
+  const { id } = useParams() 
   const [accommodation, setAccommodation] = useState(null)
 
   useEffect(() => {
     const fetchAlojamiento = async () => {
       try {
-        // Guardar solo el ID en localStorage
+        
         localStorage.setItem('selectedAccommodationId', id)
 
         console.log('Obteniendo alojamiento desde la API...')
@@ -25,7 +25,7 @@ const HostingCard = () => {
         const data = await response.json()
         console.log('Respuesta de la API:', data)
 
-        setAccommodation(data) // se guarda la data en el estado accommodation
+        setAccommodation(data) 
       } catch (error) {
         console.error('Error al obtener los detalles:', error)
       }

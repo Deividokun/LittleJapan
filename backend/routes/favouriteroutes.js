@@ -7,10 +7,9 @@ const {
   deleteFavorite
 } = require('../controllers/favouriteControllers')
 
-// Rutas CRUD
-router.get('/favourites/:userId', getFavorites) // Obtener favoritos de un usuario
-router.get('/favourites/:favId', getFavoriteById) // Obtener un favorito por ID
-router.post('/favourites', addFavorite) // Agregar un favorito
-router.delete('/favourites/:favId', deleteFavorite) // Eliminar un favorito
+router.get('/favourites/:userId', getFavorites) 
+router.get('/favourites/:favId', getFavoriteById) 
+router.post('/favourites', addFavorite) 
+router.delete('/favourites/:favId', deleteFavorite) 
 
 module.exports = router

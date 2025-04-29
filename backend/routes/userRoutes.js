@@ -8,14 +8,14 @@ const {
   updateUser,
   deleteUser,
   loginUser
-} = require('../controllers/userControllers') // Ajusta la ruta si es necesario
+} = require('../controllers/userControllers') 
 
-// Rutas de usuario
-router.get('/users', getUsers) // Obtener todos los usuarios
+
+router.get('/users', getUsers) 
 router.post('/users/login', loginUser)
-router.get('/users/:id', getUserById) // Obtener un usuario por ID
-router.post('/users', createUser) // Crear un nuevo usuario
-router.put('/users/:id', updateUser) // Actualizar un usuario
-router.delete('/users/:id', deleteUser) // Eliminar un usuario
+router.get('/users/:id', getUserById)
+router.post('/users', createUser) 
+router.put('/users/:id', updateUser) 
+router.delete('/users/:id', deleteUser) 
 
 module.exports = router

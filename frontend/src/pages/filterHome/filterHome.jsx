@@ -39,7 +39,7 @@ function FilterHome() {
     indexOfLastAccommodation
   )
 
-  // Cambiar página
+ 
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const nextPage = () => {
@@ -64,7 +64,7 @@ function FilterHome() {
           <div className='results-grid'>
             {currentAccommodations.map(
               (
-                accommodation // se recorre el array de alojamientos actuales y se muestra en pantalla.
+                accommodation 
               ) => (
                 <NavLink
                   to={`/detail/${accommodation.id}`}
@@ -75,7 +75,7 @@ function FilterHome() {
                     <img src={accommodation.image} alt={accommodation.name} />
                     <div
                       className='heart-icon'
-                      onClick={(e) => toggleFavorite(accommodation.id, e)} // se pasa el id del alojamiento y el evento.
+                      onClick={(e) => toggleFavorite(accommodation.id, e)} 
                     >
                       {favorites.includes(accommodation.id) ? '❤️' : '🤍'}
                     </div>

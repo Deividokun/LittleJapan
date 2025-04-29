@@ -13,9 +13,7 @@ function Filter() {
   const handleFilter = async () => {
     try {
       const token = localStorage.getItem('token')
-      const params = {} // Objeto para construir parámetros dinámicamente
-
-      // Solo añadir parámetros si tienen valor
+      const params = {} 
       if (tipoAlojamiento) params.tipoAlojamiento = tipoAlojamiento
       if (ciudad) params.ciudad = ciudad
       if (precio) params.precio = precio
@@ -46,7 +44,7 @@ function Filter() {
   return (
     <div className='filter-container'>
       <div className='filter-accommomodation'>
-        {/* Tipo de Alojamiento */}
+        
         <div className='filter-item'>
           <label htmlFor='tipo-alojamiento'>Type of Accommodation</label>
           <select
@@ -61,7 +59,7 @@ function Filter() {
           </select>
         </div>
 
-        {/* Precio */}
+      
         <div className='filter-item'>
           <label htmlFor='precio'>Maximum Price per Night</label>
           <input
@@ -74,7 +72,7 @@ function Filter() {
           />
         </div>
 
-        {/* Ciudad */}
+      
         <div className='filter-item'>
           <label htmlFor='ciudad'>City</label>
           <select
@@ -91,7 +89,7 @@ function Filter() {
           </select>
         </div>
 
-        {/* Huéspedes */}
+        
         <div className='filter-item'>
           <label htmlFor='huespedes'>Number of Guests</label>
           <input

@@ -8,11 +8,11 @@ const {
   deleteAccommodation
 } = require('../controllers/accommodationControllers')
 
-// Rutas CRUD
-router.get('/accommodations', getAccommodations) // Obtener todos los alojamientos
-router.get('/accommodations/:id', getAccommodationById) // Obtener un alojamiento por id etmfmfmfmf
-router.post('/accommodations', addAccommodation) // Crear un nuevo alojamiento
+
+router.get('/accommodations', getAccommodations) 
+router.get('/accommodations/:id', getAccommodationById) 
+router.post('/accommodations', addAccommodation) 
 // router.put('/accommodations/:id', updateAccommodation) // Actualizar un alojamiento
-router.delete('/accommodations/:id', deleteAccommodation) // Eliminar un alojamiento
+router.delete('/accommodations/:id', deleteAccommodation) 
 
 module.exports = router

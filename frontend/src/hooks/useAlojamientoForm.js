@@ -6,7 +6,7 @@ const useAlojamientoForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (field, value) => {
-    dispatch({ type: 'UPDATE_FIELD', payload: { field, value } }) // captura el campo y el valor  // actualiza el estado
+    dispatch({ type: 'UPDATE_FIELD', payload: { field, value } }) 
   }
 
   const resetForm = () => {
@@ -51,10 +51,10 @@ const useAlojamientoForm = () => {
 
       let responseData
       try {
-        // Intentar parsear la respuesta como JSON
+      
         responseData = JSON.parse(responseText)
       } catch (error) {
-        // Si no es JSON, usar el texto como está
+       
         responseData = { message: responseText }
       }
 

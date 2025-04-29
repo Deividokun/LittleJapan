@@ -5,8 +5,8 @@ const ScrollToTop = () => {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    window.scrollTo(0, 0) // Mueve la página al inicio
-  }, [pathname]) // Se ejecuta cada vez que cambia la ruta
+    window.scrollTo(0, 0) 
+  }, [pathname]) 
 
   return null
 }

@@ -9,11 +9,11 @@ const {
   deleteReserve
 } = require('../controllers/reserveController')
 
-// Rutas CRUD
-router.get('/reserves', getReserves) // Obtener todas las reservas
-router.get('/reserves/:id', getReserveById) // Obtener una reserva por id
-router.post('/reserves', addReserve) // Crear una nueva reserva
-router.put('/reserves/:id', updateReserve) // Actualizar una reserva
-router.delete('/reserves/:id', deleteReserve) // Eliminar una reserva
+
+router.get('/reserves', getReserves) 
+router.get('/reserves/:id', getReserveById) 
+router.post('/reserves', addReserve) 
+router.put('/reserves/:id', updateReserve) 
+router.delete('/reserves/:id', deleteReserve) 
 
 module.exports = router

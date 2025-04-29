@@ -6,7 +6,7 @@ function MyProfile() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const userId = localStorage.getItem('userId') // Obtener el token del localStorage
+        const userId = localStorage.getItem('userId') 
         console.log(userId, 'miau')
         if (!userId) return
 
@@ -16,7 +16,7 @@ function MyProfile() {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${userId}` // Solo si realmente usas JWT
+              Authorization: `Bearer ${userId}` 
             }
           }
         )

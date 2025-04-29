@@ -8,11 +8,11 @@ const {
   deleteService
 } = require('../controllers/serviceController')
 
-// Rutas CRUD
-router.get('/services', getServices) // Obtener todos los servicios
-router.get('/services/:id', getServiceById) // Obtener un servicio por id
-router.post('/services', addService) // Crear un nuevo servicio
-router.put('/services/:id', updateService) // Actualizar un servicio
-router.delete('/services/:id', deleteService) // Eliminar un servicio
+
+router.get('/services', getServices)
+router.get('/services/:id', getServiceById) 
+router.post('/services', addService) 
+router.put('/services/:id', updateService) 
+router.delete('/services/:id', deleteService) 
 
 module.exports = router

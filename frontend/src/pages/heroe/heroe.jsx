@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom' // Importamos el hook useNavigate de react-router-dom, que permite la navegación programática entre páginas.
+import { useNavigate } from 'react-router-dom'
 import './heroe.css'
 
 function Heroe() {
@@ -8,15 +8,15 @@ function Heroe() {
   const handleImageClick = (event) => {
     event.preventDefault()
 
-    // Verificar si el usuario está logueado (es decir, si hay un token en localStorage)
+   
     const token = localStorage.getItem('token')
     if (!token) {
       alert('You need to be logged in to access this option.')
       return
     }
 
-    // Si el usuario está logueado, navegar a la nueva ruta
-    navigate('/add-house') // Cambia '/destination' por la ruta deseada
+    
+    navigate('/add-house') 
   }
 
   const handleNavigation = async (filterCriteria, event) => {
@@ -25,13 +25,13 @@ function Heroe() {
     try {
       const queryParams = new URLSearchParams(filterCriteria).toString()
       const token = localStorage.getItem('token')
-      //toma el filtercriteria que es el objeto que se pasa como argumento a la función handleNavigation y lo convierte en una cadena de consulta que se puede agregar a la URL.
+     
       const response = await fetch(
         `http://localhost:3000/api/accommodations?${queryParams}`,
         {
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`, // Incluir el token
+            Authorization: `Bearer ${token}`, 
             'Content-Type': 'application/json'
           }
         }
@@ -41,7 +41,7 @@ function Heroe() {
         throw new Error(`HTTP error! Status: ${response.status}`)
       }
 
-      const resultados = await response.json() //covuelve los resultados obtenidos del servidor
+      const resultados = await response.json() 
       console.log('Results filtered from the server:', resultados)
       navigate('/filterhome', { state: { resultados } })
     } catch (error) {
@@ -68,7 +68,7 @@ function Heroe() {
         <article>
           <div
             className='image-container'
-            onClick={(e) => handleNavigation({ ciudad: 'Tokyo' }, e)} //le pasamos un objeto con la ciudad que queremos filtrar por medio de la función handleNavigation
+            onClick={(e) => handleNavigation({ ciudad: 'Tokyo' }, e)} 
           >
             <img src='/assets/lugaresHeroe/tokyo.jpg' alt='Tokyo' />
             <span className='image-title'>Tokyo 🎌</span>

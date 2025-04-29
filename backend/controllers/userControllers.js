@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { sql, connectToDatabase } = require('../config/db')
 const User = require('../models/User')
-// Función para obtener todos los usuarios
+
 
 async function getUsers(req, res) {
   try {
@@ -13,12 +13,12 @@ async function getUsers(req, res) {
         'SELECT TOP (1000) [id], [name], [experience], [password], [rating], [image], [document_number], [telephone_number], [age], [Email], [FullName] FROM [LITTLEJAPAN2].[dbo].[Users]'
       )
 
-    // Convertir cada objeto JSON en una instancia de User
+
     const users = result.recordset.map((user) =>
       Object.assign(new User(user), user)
     )
 
-    console.log(users) // Verifica que se ven como instancias de User
+    console.log(users) 
 
     res.json(users)
   } catch (error) {
@@ -27,8 +27,7 @@ async function getUsers(req, res) {
   }
 }
 
-// Función para obtener un usuario por ID
-// Función para obtener un usuario por ID y devolverlo como objeto
+
 async function getUserById(req, res) {
   const { id } = req.params
   try {
@@ -42,8 +41,8 @@ async function getUserById(req, res) {
     if (result.recordset.length === 0) {
       return res.status(404).send('Usuario no encontrado')
     }
-    const user = new User(result.recordset[0]) // Convertir a objeto User
-    res.json(user) // Devolver el objeto User
+    const user = new User(result.recordset[0]) 
+    res.json(user) 
   } catch (error) {
     console.error('Error al obtener usuario:', error)
     res.status(500).send('Error al obtener usuario')
@@ -81,7 +80,7 @@ async function loginUser(req, res) {
       { expiresIn: '1h' }
     )
 
-    // Incluir el id del usuario en la respuesta
+  
     res.json({ token, userId: user.id })
   } catch (error) {
     console.error('Error en el login:', error)
@@ -104,7 +103,6 @@ async function createUser(req, res) {
   try {
     const pool = await sql.connect()
 
-    // Verificar si el document_number ya existe
     const existingUser = await pool
       .request()
       .input('document_number', sql.NVarChar, document_number)
@@ -118,16 +116,16 @@ async function createUser(req, res) {
         .json({ message: 'El número de documento ya está registrado' })
     }
 
-    // Hashear la contraseña
+ 
     const saltRounds = 10
     const hashedPassword = await bcrypt.hash(password, saltRounds)
 
-    // Si no existe, proceder con la inserción
+
     const result = await pool
       .request()
       .input('name', sql.NVarChar, name)
       .input('experience', sql.Int, experience)
-      .input('password', sql.NVarChar, hashedPassword) // Ahora usamos la contraseña hasheada
+      .input('password', sql.NVarChar, hashedPassword) 
       .input('image', sql.NVarChar, image)
       .input('document_number', sql.NVarChar, document_number)
       .input('telephone_number', sql.NVarChar, telephone_number)
@@ -160,8 +158,7 @@ async function createUser(req, res) {
     res.status(500).json({ message: 'Error interno del servidor' })
   }
 }
-// Función para actualizar un usuario
-// Función para actualizar un usuario
+
 async function updateUser(req, res) {
   const { id } = req.params
   const {
@@ -182,7 +179,7 @@ async function updateUser(req, res) {
       .input('id', sql.UniqueIdentifier, id)
       .input('name', sql.NVarChar, name)
       .input('experience', sql.Int, experience)
-      .input('password', sql.NVarChar, password) // Se recomienda usar un hash de la contraseña
+      .input('password', sql.NVarChar, password) 
       .input('rating', sql.Float, rating)
       .input('image', sql.NVarChar, image)
       .input('document_number', sql.NVarChar, document_number)
@@ -211,14 +208,13 @@ async function updateUser(req, res) {
       fullName
     })
 
-    res.json(updatedUser) // Devolver el objeto User actualizado
+    res.json(updatedUser) 
   } catch (error) {
     console.error('Error al actualizar usuario:', error)
     res.status(500).send('Error al actualizar usuario')
   }
 }
 
-// Función para eliminar un usuario
 async function deleteUser(req, res) {
   const { id } = req.params
   try {

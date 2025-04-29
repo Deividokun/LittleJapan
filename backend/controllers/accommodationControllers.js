@@ -4,7 +4,7 @@ const User = require('../models/User')
 
 async function getAccommodations(req, res) {
   try {
-    const { tipoAlojamiento, ciudad, precio, huespedes } = req.query //params -> query
+    const { tipoAlojamiento, ciudad, precio, huespedes } = req.query 
 
     let query = `
       SELECT
@@ -20,7 +20,7 @@ async function getAccommodations(req, res) {
       LEFT JOIN Service S ON ASR.service_id = S.id 
     `
 
-    const filters = [] // <-- Aquí se define filters para los filter de mi fronted y se almacena en un array
+    const filters = [] 
     const params = []
 
     if (tipoAlojamiento) {
@@ -51,8 +51,8 @@ async function getAccommodations(req, res) {
       query += ` WHERE ${filters.join(' AND ')}`
     }
 
-    const pool = await sql.connect() // Conectar a la base de datos
-    const request = pool.request() // Crear una nueva solicitud
+    const pool = await sql.connect() 
+    const request = pool.request() 
 
     params.forEach((param) => {
       request.input(param.name, param.type, param.value)
@@ -60,11 +60,11 @@ async function getAccommodations(req, res) {
 
     const result = await request.query(query)
 
-    // Procesar resultados
-    const accommodationMap = new Map() // <-- Aquí se define accommodationMap
+    
+    const accommodationMap = new Map() 
 
     result.recordset.forEach((row) => {
-      // <-- Aquí se recorre el recordset y se almacena en accommodationMap
+    
       if (!accommodationMap.has(row.id)) {
         accommodationMap.set(row.id, {
           id: row.id,
@@ -108,7 +108,7 @@ async function getAccommodations(req, res) {
   }
 }
 
-// Función para obtener un alojamiento por su id (uniqueidentifier)
+
 async function getAccommodationById(req, res) {
   try {
     const { id } = req.params
@@ -158,7 +158,7 @@ async function getAccommodationById(req, res) {
       row.image,
       row.name,
       row.description,
-      [] // Inicializamos como un array vacío para los servicios
+      [] 
     )
 
     result.recordset.forEach((row) => {
@@ -179,7 +179,7 @@ async function getAccommodationById(req, res) {
   }
 }
 
-// Función para agregar un nuevo alojamiento
+
 async function addAccommodation(req, res) {
   const {
     type,
@@ -190,7 +190,7 @@ async function addAccommodation(req, res) {
     image,
     name,
     description,
-    services // Array de IDs de servicios
+    services
   } = req.body
 
   if (
@@ -209,12 +209,12 @@ async function addAccommodation(req, res) {
   try {
     const pool = await sql.connect()
 
-    // Iniciar una transacción para asegurar que todas las operaciones lleguen con seguirdad.
+    
     const transaction = new sql.Transaction(pool)
     await transaction.begin()
 
     try {
-      // Insertamos el nuevo alojamiento
+      
       const result = await transaction
         .request()
         .input('type', sql.NVarChar, type)
@@ -229,12 +229,12 @@ async function addAccommodation(req, res) {
           'INSERT INTO Accommodation (type, ownerid, guests, city, pricepernight, image, name, description) OUTPUT INSERTED.id VALUES (@type, @ownerid, @guests, @city, @pricepernight, @image, @name, @description)'
         )
 
-      const accommodationId = result.recordset[0].id // ID del alojamiento recién insertado es 0 porque es la primera fila
+      const accommodationId = result.recordset[0].id 
 
-      // Insertamos las relaciones entre el alojamiento y los servicios
+  
       if (services && services.length > 0) {
         for (const serviceId of services) {
-          // Verificar que el serviceId sea un UniqueIdentifier válido
+          
           if (!isValidUUID(serviceId)) {
             return res.status(400).send(`ID de servicio inválido: ${serviceId}`)
           }
@@ -242,26 +242,26 @@ async function addAccommodation(req, res) {
           await transaction
             .request()
             .input('accommodationId', sql.UniqueIdentifier, accommodationId)
-            .input('serviceId', sql.UniqueIdentifier, serviceId) // Asegurarse que sea UniqueIdentifier
+            .input('serviceId', sql.UniqueIdentifier, serviceId) 
             .query(
               'INSERT INTO Accommodation_Services (accommodation_id, service_id) VALUES (@accommodationId, @serviceId)'
             )
         }
       }
 
-      // Función para validar el UUID
+    
       function isValidUUID(uuid) {
         const regex =
           /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/
         return regex.test(uuid)
       }
 
-      // Confirmar la transacción y enviar
+      
       await transaction.commit()
 
       res.status(201).send('Alojamiento creado correctamente')
     } catch (error) {
-      // Si hay un error en la transacción, hacer rollback
+      
       await transaction.rollback()
       console.error('Error al agregar alojamiento:', error)
       res.status(500).send('Error al agregar alojamiento')
@@ -272,7 +272,7 @@ async function addAccommodation(req, res) {
   }
 }
 
-// Función para eliminar un alojamiento
+
 async function deleteAccommodation(req, res) {
   try {
     const { id } = req.params

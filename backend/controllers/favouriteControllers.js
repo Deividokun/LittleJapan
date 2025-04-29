@@ -1,6 +1,6 @@
 const { sql } = require('../config/db')
 
-// Función para obtener alojamientos favoritos por userId
+
 async function getFavorites(req, res) {
   const { userId } = req.params
 
@@ -25,9 +25,9 @@ async function getFavorites(req, res) {
 }
 
 async function getFavoriteById(req, res) {
-  const { id: userId } = req.params // Corregimos el nombre del parámetro
+  const { id: userId } = req.params 
 
-  console.log('Parámetros recibidos:', req.params) // Para depuración
+  console.log('Parámetros recibidos:', req.params) 
 
   if (!userId) {
     return res.status(400).json({ message: 'Falta el userId en la solicitud' })
@@ -37,7 +37,7 @@ async function getFavoriteById(req, res) {
     const pool = await sql.connect()
     const result = await pool
       .request()
-      .input('userId', sql.UniqueIdentifier, userId) // Se asegura de usar el ID correcto
+      .input('userId', sql.UniqueIdentifier, userId) 
       .query(`
         SELECT A.*
         FROM [LITTLEJAPAN2].[dbo].[Favourite] F
@@ -83,7 +83,7 @@ async function addFavorite(req, res) {
   }
 }
 
-// Eliminar un favorito
+
 async function deleteFavorite(req, res) {
   const { favId } = req.params
 

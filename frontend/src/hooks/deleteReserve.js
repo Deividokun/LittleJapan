@@ -15,7 +15,7 @@ const deleteReservation = async (reservationId, token, setReservations) => {
 
     if (!response.ok) throw new Error('Error deleting reservation')
 
-    // Actualiza el estado para eliminar la reserva sin recargar la página
+    
     setReservations((prevReservations) =>
       prevReservations.filter((res) => res.id !== reservationId)
     )

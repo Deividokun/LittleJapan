@@ -1,7 +1,7 @@
 const { sql } = require('../config/db')
 const Service = require('../models/services')
 
-// Obtener todos los servicios
+
 async function getServices(req, res) {
   try {
     const pool = await sql.connect()
@@ -18,7 +18,7 @@ async function getServices(req, res) {
   }
 }
 
-// Obtener un servicio por ID
+
 async function getServiceById(req, res) {
   try {
     const { id } = req.params
@@ -46,7 +46,6 @@ async function getServiceById(req, res) {
   }
 }
 
-// Agregar un nuevo servicio
 async function addService(req, res) {
   try {
     const { name, description, image } = req.body
@@ -67,7 +66,6 @@ async function addService(req, res) {
   }
 }
 
-// Actualizar un servicio
 async function updateService(req, res) {
   try {
     const { id } = req.params
@@ -94,7 +92,7 @@ async function updateService(req, res) {
   }
 }
 
-// Eliminar un servicio
+
 async function deleteService(req, res) {
   try {
     const { id } = req.params

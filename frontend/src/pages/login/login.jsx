@@ -16,7 +16,7 @@ function LoginUser() {
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-  } // vale actualizar en directo el estado del formulario con los datos introducidos por el usuario para mandarlo a las variables de estado formdata
+  } 
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -36,16 +36,14 @@ function LoginUser() {
         throw new Error(data.error || 'Error al iniciar sesión')
       }
 
-      console.log('Respuesta recibida:', data) // Agregar este log
-
-      // Guardar el token y el userId en localStorage
+      console.log('Respuesta recibida:', data) 
       localStorage.setItem('token', data.token)
       localStorage.setItem('userId', data.userId)
 
       console.log('Token guardado:', localStorage.getItem('token'))
       console.log('UserId guardado:', localStorage.getItem('userId'))
 
-      // Redirigir al usuario a la página de inicio u otra página
+  
       navigate('/')
     } catch (err) {
       console.error('Error detallado:', err)

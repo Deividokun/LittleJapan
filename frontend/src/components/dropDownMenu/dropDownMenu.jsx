@@ -6,16 +6,16 @@ function DropDownMenu({ isOpen, onClose }) {
   const navigate = useNavigate()
   const menuRef = useRef(null)
 
-  // Check if the user is authenticated via token
+
   const isLoggedIn = Boolean(localStorage.getItem('token'))
   console.log('isLoggedIn:', isLoggedIn)
   const handleLogout = () => {
-    localStorage.removeItem('token') // Remove the token when logging out
+    localStorage.removeItem('token') 
     onClose()
-    navigate('/') // Redirect to the homepage
+    navigate('/') 
   }
 
-  // Close menu when clicking outside
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -38,11 +38,6 @@ function DropDownMenu({ isOpen, onClose }) {
         <li>
           <NavLink to='/' onClick={onClose}>
             Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/array' onClick={onClose}>
-            array
           </NavLink>
         </li>
         {!isLoggedIn && (

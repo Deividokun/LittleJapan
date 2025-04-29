@@ -3,12 +3,12 @@ const User = require('../models/User')
 const Accommodation = require('../models/accommodation')
 const Reservation = require('../models/reserves')
 
-// Función para obtener todas las reservas con los datos completos
+
 async function getReserves(req, res) {
   try {
     const pool = await sql.connect()
 
-    // Consulta SQL corregida
+    
     const query = `
       SELECT 
         r.id AS reserveId,
@@ -48,7 +48,7 @@ async function getReserves(req, res) {
 
     const result = await pool.request().query(query)
 
-    // Mapa para organizar reservas sin duplicar
+    
     const reservesMap = new Map()
 
     result.recordset.forEach((row) => {
@@ -69,14 +69,14 @@ async function getReserves(req, res) {
         const accommodation = new Accommodation(
           row.accommodationId,
           row.accommodationType,
-          user, // Relación con usuario
+          user,
           row.accommodationGuests,
           row.accommodationCity,
           row.accommodationPricePerNight,
           row.accommodationImage,
           row.accommodationName,
           row.accommodationDescription,
-          [] // Array vacío para agregar servicios
+          [] 
         )
 
         reservesMap.set(
@@ -92,7 +92,7 @@ async function getReserves(req, res) {
         )
       }
 
-      // Agregar servicios al alojamiento si existen
+    
       if (row.serviceId) {
         reservesMap.get(row.reserveId).accommodation.services.push({
           id: row.serviceId,
@@ -103,7 +103,7 @@ async function getReserves(req, res) {
       }
     })
 
-    // Enviar las reservas como respuesta
+
     res.json(Array.from(reservesMap.values()))
   } catch (error) {
     console.error('Error al obtener reservas:', error)
@@ -111,12 +111,12 @@ async function getReserves(req, res) {
   }
 }
 
-// Función para obtener una reserva por su id (uniqueidentifier)
+
 const getReserveById = async (req, res) => {
   try {
     const { id } = req.params
 
-    console.log('ID recibido:', id) // <-- Verifica qué se está recibiendo
+    console.log('ID recibido:', id) 
 
     if (!id) {
       return res.status(400).json({ error: 'ID no proporcionado' })
@@ -133,7 +133,7 @@ const getReserveById = async (req, res) => {
     const pool = await sql.connect()
     const result = await pool
       .request()
-      .input('id', sql.UniqueIdentifier, id) // <-- Aquí es donde fallaría si el ID no es válido
+      .input('id', sql.UniqueIdentifier, id) 
       .query('SELECT * FROM Reserve WHERE id = @id')
 
     if (result.recordset.length === 0) {
@@ -147,8 +147,7 @@ const getReserveById = async (req, res) => {
   }
 }
 
-// Función para agregar una nueva reserva
-// Función para agregar una nueva reserva con validaciones
+
 async function addReserve(req, res) {
   try {
     const { price, startDate, endDate, usersid, accommodationid } = req.body
@@ -159,13 +158,12 @@ async function addReserve(req, res) {
         .json({ error: 'Todos los campos son obligatorios' })
     }
 
-    // Convertir fechas a formato YYYY-MM-DD
     const formattedStartDate = new Date(startDate).toISOString().split('T')[0]
     const formattedEndDate = new Date(endDate).toISOString().split('T')[0]
 
     const pool = await sql.connect()
 
-    // Verificar si el usuario y el alojamiento existen
+
     const userResult = await pool
       .request()
       .input('usersid', sql.UniqueIdentifier, usersid)
@@ -184,7 +182,7 @@ async function addReserve(req, res) {
       return res.status(404).json({ error: 'El alojamiento no existe' })
     }
 
-    // Verificar disponibilidad
+
     const existingReservation = await pool
       .request()
       .input('accommodationid', sql.UniqueIdentifier, accommodationid)
@@ -203,7 +201,7 @@ async function addReserve(req, res) {
         .json({ error: 'El alojamiento ya está reservado en esas fechas' })
     }
 
-    // Insertar la reserva
+  
     await pool
       .request()
       .input('price', sql.Float, price)
@@ -222,7 +220,7 @@ async function addReserve(req, res) {
     res.status(500).json({ error: 'Error al agregar reserva' })
   }
 }
-// Función para actualizar una reserva
+
 async function updateReserve(req, res) {
   try {
     const { id } = req.params
@@ -251,7 +249,7 @@ async function updateReserve(req, res) {
   }
 }
 
-// Función para eliminar una reserva
+
 async function deleteReserve(req, res) {
   try {
     const { id } = req.params
