@@ -146,8 +146,6 @@ const getReserveById = async (req, res) => {
     res.status(500).json({ error: 'Error interno del servidor' })
   }
 }
-
-
 async function addReserve(req, res) {
   try {
     const { price, startDate, endDate, usersid, accommodationid } = req.body
@@ -221,6 +219,79 @@ async function addReserve(req, res) {
   }
 }
 
+// async function addReserve(req, res) {
+//   try {
+//     const { price, startDate, endDate, usersid, accommodationid } = req.body
+
+//     if (!price || !startDate || !endDate || !usersid || !accommodationid) {
+//       return res
+//         .status(400)
+//         .json({ error: 'Todos los campos son obligatorios' })
+//     }
+
+//     const formattedStartDate = new Date(startDate).toISOString().split('T')[0]
+//     const formattedEndDate = new Date(endDate).toISOString().split('T')[0]
+
+//     const pool = await sql.connect()
+
+
+//     const userResult = await pool
+//       .request()
+//       .input('usersid', sql.UniqueIdentifier, usersid)
+//       .query('SELECT id FROM [Users] WHERE id = @usersid')
+
+//     const accommodationResult = await pool
+//       .request()
+//       .input('accommodationid', sql.UniqueIdentifier, accommodationid)
+//       .query('SELECT id FROM Accommodation WHERE id = @accommodationid')
+
+//     if (userResult.recordset.length === 0) {
+//       return res.status(404).json({ error: 'El usuario no existe' })
+//     }
+
+//     if (accommodationResult.recordset.length === 0) {
+//       return res.status(404).json({ error: 'El alojamiento no existe' })
+//     }
+
+
+//     const existingReservation = await pool
+//       .request()
+//       .input('accommodationid', sql.UniqueIdentifier, accommodationid)
+//       .input('startDate', sql.Date, formattedStartDate)
+//       .input('endDate', sql.Date, formattedEndDate).query(`
+//         SELECT id FROM Reserve 
+//         WHERE accommodationid = @accommodationid 
+//         AND (
+//           (startDate <= @endDate AND endDate >= @startDate)
+//         )
+//       `)
+
+//     if (existingReservation.recordset.length > 0) {
+//       return res
+//         .status(400)
+//         .json({ error: 'El alojamiento ya está reservado en esas fechas' })
+//     }
+
+  
+//     await pool
+//       .request()
+//       .input('price', sql.Float, price)
+//       .input('startDate', sql.Date, formattedStartDate)
+//       .input('endDate', sql.Date, formattedEndDate)
+//       .input('usersid', sql.UniqueIdentifier, usersid)
+//       .input('accommodationid', sql.UniqueIdentifier, accommodationid)
+//       .query(
+//         `INSERT INTO Reserve (price, startDate, endDate, usersid, accommodationid) 
+//          VALUES (@price, @startDate, @endDate, @usersid, @accommodationid)`
+//       )
+
+//     res.status(201).json({ message: 'Reserva creada correctamente' })
+//   } catch (error) {
+//     console.error('Error al agregar reserva:', error)
+//     res.status(500).json({ error: 'Error al agregar reserva' })
+//   }
+// }
+
 async function updateReserve(req, res) {
   try {
     const { id } = req.params
@@ -252,21 +323,26 @@ async function updateReserve(req, res) {
 
 async function deleteReserve(req, res) {
   try {
-    const { id } = req.params
-    const pool = await sql.connect()
-    const result = await pool
-      .request()
-      .input('id', sql.UniqueIdentifier, id)
-      .query('DELETE FROM Reserve WHERE id = @id')
+    const id = parseInt(req.params.id);
 
-    if (result.rowsAffected[0] === 0) {
-      return res.status(404).send('Reserva no encontrada')
+    if (isNaN(id)) {
+      return res.status(400).json({ error: 'ID inválido (no es un número)' });
     }
 
-    res.send('Reserva eliminada correctamente')
+    const pool = await sql.connect();
+    const result = await pool
+      .request()
+      .input('id', sql.Int, id)
+      .query('DELETE FROM Reserve WHERE id = @id');
+
+    if (result.rowsAffected[0] === 0) {
+      return res.status(404).json({ error: 'Reserva no encontrada' });
+    }
+
+    res.status(200).json({ message: 'Reserva eliminada correctamente' });
   } catch (error) {
-    console.error('Error al eliminar reserva:', error)
-    res.status(500).send('Error al eliminar reserva')
+    console.error('Error al eliminar reserva:', error);
+    res.status(500).json({ error: 'Error al eliminar reserva' });
   }
 }
 

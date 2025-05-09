@@ -6,9 +6,9 @@ function FilterHome() {
   const location = useLocation()
   const resultados = Array.isArray(location.state?.resultados)
     ? location.state.resultados
-    : [] // es una condicion que verifica si location.state.resultados es un array, si es asi, se asigna a resultados, si no, se asigna un array vacio.
+    : [] 
 
-  // Cargar favoritos desde localStorage
+ 
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem('favorites')) || []
   )
@@ -18,19 +18,19 @@ function FilterHome() {
   }, [favorites])
 
   const toggleFavorite = (id, event) => {
-    // event.stopPropagation()
-    event.preventDefault() // Evita que el NavLink navegue al hacer clic en el corazón
+    
+    event.preventDefault() 
 
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]
-    ) // se paa el id por parametro y se verifica si el id ya esta en el array de favoritos, si es asi se añade por spreed peraton que es un nuevo array, si no se elimina el id del array.
+    ) 
   }
 
-  // Paginación
+
   const [currentPage, setCurrentPage] = useState(1)
   const accommodationsPerPage = 10
 
-  // Obtener alojamientos actuales
+ 
   const indexOfLastAccommodation = currentPage * accommodationsPerPage
   const indexOfFirstAccommodation =
     indexOfLastAccommodation - accommodationsPerPage

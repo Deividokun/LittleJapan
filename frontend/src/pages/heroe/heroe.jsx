@@ -27,7 +27,7 @@ function Heroe() {
       const token = localStorage.getItem('token')
      
       const response = await fetch(
-        `http://localhost:3000/api/accommodations?${queryParams}`,
+        `http://localhost:3003/api/accommodations?${queryParams}`,
         {
           method: 'GET',
           headers: {

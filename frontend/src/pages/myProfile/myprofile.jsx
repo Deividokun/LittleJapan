@@ -11,7 +11,7 @@ function MyProfile() {
         if (!userId) return
 
         const response = await fetch(
-          `http://localhost:3000/api/users/${userId}`,
+          `http://localhost:3003/api/users/${userId}`,
           {
             method: 'GET',
             headers: {

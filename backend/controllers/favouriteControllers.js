@@ -11,8 +11,8 @@ async function getFavorites(req, res) {
       .input('userId', sql.UniqueIdentifier, userId).query(`
         SELECT A.[id], A.[type], A.[ownerid], A.[guests], A.[city], 
                A.[pricepernight], A.[image], A.[name], A.[description]
-        FROM [LITTLEJAPAN2].[dbo].[Favourite] F
-        JOIN [LITTLEJAPAN2].[dbo].[Accommodation] A 
+        FROM [BDlitterujapan].[dbo].[Favourite] F
+        JOIN [BDlitterujapan].[dbo].[Accommodation] A 
             ON F.[accommodationsid] = A.[id]
         WHERE F.[usersid] = @userId;
       `)
@@ -40,8 +40,8 @@ async function getFavoriteById(req, res) {
       .input('userId', sql.UniqueIdentifier, userId) 
       .query(`
         SELECT A.*
-        FROM [LITTLEJAPAN2].[dbo].[Favourite] F
-        LEFT JOIN [LITTLEJAPAN2].[dbo].[Accommodation] A 
+        FROM [BDlitterujapan].[dbo].[Favourite] F
+        LEFT JOIN [BDlitterujapan].[dbo].[Accommodation] A 
             ON F.[accommodationsid] = A.[id]
         WHERE F.[usersid] = @userId;
       `)
@@ -72,7 +72,7 @@ async function addFavorite(req, res) {
       .request()
       .input('userId', sql.UniqueIdentifier, userId)
       .input('accommodationId', sql.UniqueIdentifier, accommodationId).query(`
-        INSERT INTO [LITTLEJAPAN2].[dbo].[Favourite] (usersid, accommodationsid)
+        INSERT INTO [BDlitterujapan].[dbo].[Favourite] (usersid, accommodationsid)
         VALUES (@userId, @accommodationId);
       `)
 
@@ -92,7 +92,7 @@ async function deleteFavorite(req, res) {
     const result = await pool
       .request()
       .input('favId', sql.UniqueIdentifier, favId).query(`
-        DELETE FROM [LITTLEJAPAN2].[dbo].[Favourite]
+        DELETE FROM [BDlitterujapan].[dbo].[Favourite]
         WHERE accommodationsid = @favId;
       `)
 

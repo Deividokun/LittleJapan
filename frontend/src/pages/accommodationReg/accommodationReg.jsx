@@ -12,7 +12,7 @@ const AddAlojamientoForm = () => {
     data: accommodations,
     loading,
     error
-  } = useFetch('http://localhost:3000/api/accommodations')
+  } = useFetch('http://localhost:3003/api/accommodations')
 
   // Extraer servicios únicos
   const allServices = accommodations?.flatMap((acc) => acc.services) ?? []
@@ -33,7 +33,7 @@ const AddAlojamientoForm = () => {
         onSubmit={(e) => {
           e.preventDefault()
           handleSubmit(
-            'http://localhost:3000/api/accommodations',
+            'http://localhost:3003/api/accommodations',
             localStorage.getItem('token')
           )
         }}

@@ -108,7 +108,6 @@ async function getAccommodations(req, res) {
   }
 }
 
-
 async function getAccommodationById(req, res) {
   try {
     const { id } = req.params

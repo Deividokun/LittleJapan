@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import DatePicker from 'react-datepicker'
+import React, { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; // Import styles from react-datepicker
-import { useNavigate } from 'react-router-dom'
-import AlarmReservation from '../alarmReservation/alarmReserva'
-import './reservationView.css'
+import { useNavigate } from 'react-router-dom';
+import AlarmReservation from '../alarmReservation/alarmReserva';
+import './reservationView.css';
 
 function ReservaView({ nochesAlojamiento, huespedes }) {
   const [startDate, setStartDate] = useState(null) 
@@ -98,7 +98,7 @@ function ReservaView({ nochesAlojamiento, huespedes }) {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/api/reserves', {
+        const response = await fetch('http://localhost:3003/api/reserves', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

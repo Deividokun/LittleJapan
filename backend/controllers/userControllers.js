@@ -10,7 +10,7 @@ async function getUsers(req, res) {
     const result = await pool
       .request()
       .query(
-        'SELECT TOP (1000) [id], [name], [experience], [password], [rating], [image], [document_number], [telephone_number], [age], [Email], [FullName] FROM [LITTLEJAPAN2].[dbo].[Users]'
+        'SELECT TOP (1000) [id], [name], [experience], [password], [rating], [image], [document_number], [telephone_number], [age], [Email], [FullName] FROM [BDlitterujapan].[dbo].[Users]'
       )
 
 
@@ -36,7 +36,7 @@ async function getUserById(req, res) {
       .request()
       .input('id', sql.UniqueIdentifier, id)
       .query(
-        'SELECT [id], [name], [experience], [password], [rating], [image], [document_number], [telephone_number], [age], [Email], [FullName] FROM [LITTLEJAPAN2].[dbo].[Users] WHERE id = @id'
+        'SELECT [id], [name], [experience], [password], [rating], [image], [document_number], [telephone_number], [age], [Email], [FullName] FROM [BDlitterujapan].[dbo].[Users] WHERE id = @id'
       )
     if (result.recordset.length === 0) {
       return res.status(404).send('Usuario no encontrado')
@@ -57,7 +57,7 @@ async function loginUser(req, res) {
 
     const result = await sql.query`
       SELECT [id], [name], [password] 
-      FROM [LITTLEJAPAN2].[dbo].[Users] 
+      FROM [BDlitterujapan].[dbo].[Users] 
       WHERE name = ${nombreUsuario}
     `
 
@@ -107,7 +107,7 @@ async function createUser(req, res) {
       .request()
       .input('document_number', sql.NVarChar, document_number)
       .query(
-        'SELECT * FROM [LITTLEJAPAN2].[dbo].[Users] WHERE document_number = @document_number'
+        'SELECT * FROM [BDlitterujapan].[dbo].[Users] WHERE document_number = @document_number'
       )
 
     if (existingUser.recordset.length > 0) {
@@ -133,7 +133,7 @@ async function createUser(req, res) {
       .input('Email', sql.NVarChar, Email)
       .input('fullName', sql.NVarChar, fullName)
       .query(
-        'INSERT INTO [LITTLEJAPAN2].[dbo].[Users] ([name], [experience], [password], [image], [document_number], [telephone_number], [age], [Email], [FullName]) VALUES (@name, @experience, @password, @image, @document_number, @telephone_number, @age, @Email, @fullName)'
+        'INSERT INTO [BDlitterujapan].[dbo].[Users] ([name], [experience], [password], [image], [document_number], [telephone_number], [age], [Email], [FullName]) VALUES (@name, @experience, @password, @image, @document_number, @telephone_number, @age, @Email, @fullName)'
       )
 
     if (result.rowsAffected[0] > 0) {
@@ -188,7 +188,7 @@ async function updateUser(req, res) {
       .input('email', sql.NVarChar, email)
       .input('fullName', sql.NVarChar, fullName)
       .query(
-        'UPDATE [LITTLEJAPAN2].[dbo].[Users] SET [name] = @name, [experience] = @experience, [password] = @password, [rating] = @rating, [image] = @image, [document_number] = @document_number, [telephone_number] = @telephone_number, [age] = @age, [Email] = @email, [FullName] = @fullName WHERE id = @id'
+        'UPDATE [BDlitterujapan].[dbo].[Users] SET [name] = @name, [experience] = @experience, [password] = @password, [rating] = @rating, [image] = @image, [document_number] = @document_number, [telephone_number] = @telephone_number, [age] = @age, [Email] = @email, [FullName] = @fullName WHERE id = @id'
       )
     if (result.rowsAffected[0] === 0) {
       return res.status(404).send('Usuario no encontrado')
@@ -222,7 +222,7 @@ async function deleteUser(req, res) {
     const result = await pool
       .request()
       .input('id', sql.UniqueIdentifier, id)
-      .query('DELETE FROM [LITTLEJAPAN2].[dbo].[Users] WHERE id = @id')
+      .query('DELETE FROM [BDlitterujapan].[dbo].[Users] WHERE id = @id')
     if (result.rowsAffected[0] === 0) {
       return res.status(404).send('Usuario no encontrado')
     }

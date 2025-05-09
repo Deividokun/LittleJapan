@@ -1,36 +1,53 @@
-const express = require('express') //Se importa Express, un framework para crear servidores en Node.js.
+const express = require('express')
 const cors = require('cors')
 const app = express()
+
+// Rutas
 const userRoutes = require('./routes/userRoutes')
 const accommodationRoutes = require('./routes/accommodationroutes')
 const serviceRoutes = require('./routes/serviceroutes')
 const reserveRoute = require('./routes/reserveController')
 const favouriteRoute = require('./routes/favouriteroutes')
+
+// Conexión a base de datos
 const { connectToDatabase } = require('./config/db')
 
-const PORT = 3001
+// Puerto del servidor
+const PORT = process.env.PORT || 3003
 
+// Lista de orígenes permitidos
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://litterujapan.com'
+]
 
+// Configuración de CORS dinámica
 const corsOptions = {
-  origin: 'http://localhost:5173', 
+  origin: function (origin, callback) {
+    // Permitir peticiones sin origen (como curl o Postman)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true,
   optionsSuccessStatus: 200
 }
 
-
+// Iniciar conexión y servidor
 connectToDatabase()
   .then(() => {
-   
-    app.use(cors(corsOptions)) 
+    app.use(cors(corsOptions))
     app.use(express.json())
 
-    
+    // Rutas
     app.use('/api', userRoutes)
     app.use('/api', accommodationRoutes)
     app.use('/api', serviceRoutes)
     app.use('/api', reserveRoute)
     app.use('/api', favouriteRoute)
 
-   
     app.listen(PORT, () => {
       console.log(`Servidor corriendo en http://localhost:${PORT}`)
     })
