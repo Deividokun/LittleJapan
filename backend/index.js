@@ -49,10 +49,9 @@ connectToDatabase()
     app.use('/api', reserveRoute)
     app.use('/api', favouriteRoute)
 
-    app.listen(PORT, () => {
-      console.log(`Servidor corriendo en http://localhost:${PORT}`)
-    })
-  })
+   app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor corriendo en http://0.0.0.0:${PORT}`)
+})
   .catch((error) => {
     console.error('Error al conectar con la base de datos:', error)
     process.exit(1)
