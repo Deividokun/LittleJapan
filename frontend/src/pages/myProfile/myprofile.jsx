@@ -11,7 +11,7 @@ function MyProfile() {
         if (!userId) return
 
         const response = await fetch(
-          `http://localhost:3003/api/users/${userId}`,
+          `https://littlejapan.onrender.com/api/users/${userId}`,
           {
             method: 'GET',
             headers: {

@@ -10,7 +10,7 @@ function ReservationDetail() {
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        const response = await fetch('http://localhost:3003/api/reserves', {
+        const response = await fetch('https://littlejapan.onrender.com/api/reserves', {
           headers: { Authorization: `Bearer ${token}` }
         })
         if (!response.ok) throw new Error('Error fetching reservations')

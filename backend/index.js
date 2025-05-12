@@ -17,8 +17,10 @@ const PORT = process.env.PORT || 3003
 
 // Lista de orígenes permitidos
 const allowedOrigins = [
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'https://little-japan-knih.vercel.app'
 ]
+
 
 // Configuración de CORS dinámica
 const corsOptions = {

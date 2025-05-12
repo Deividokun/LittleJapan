@@ -22,7 +22,7 @@ function Filter() {
       const queryParams = new URLSearchParams(params).toString()
 
       const response = await fetch(
-        `http://localhost:3003/api/accommodations?${queryParams}`,
+        `https://littlejapan.onrender.com/api/accommodations?${queryParams}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

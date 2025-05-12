@@ -6,7 +6,7 @@ const deleteReservation = async (reservationId, token, setReservations) => {
 
   try {
     const response = await fetch(
-      `http://localhost:3003/api/reserves/${reservationId}`,
+      `https://littlejapan.onrender.com/api/reserves/${reservationId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
