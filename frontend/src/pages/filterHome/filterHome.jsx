@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import './FilterHome.css'
+import './filterHome.css'
 
 function FilterHome() {
   const location = useLocation()
