@@ -17,8 +17,7 @@ const PORT = process.env.PORT || 3003
 
 // Lista de orígenes permitidos
 const allowedOrigins = [
-  'http://localhost:5173',
-  'https://litterujapan.com'
+  'http://localhost:5173'
 ]
 
 // Configuración de CORS dinámica
