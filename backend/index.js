@@ -15,22 +15,15 @@ const { connectToDatabase } = require('./config/db')
 // Puerto del servidor
 const PORT = process.env.PORT || 3003
 
-// Lista de orígenes permitidos
+// ⚠️ Lista de orígenes permitidos (comentado temporalmente para pruebas desde móvil)
 const allowedOrigins = [
   'http://localhost:5173',
   'https://little-japan-knih.vercel.app'
 ]
 
-// Configuración de CORS dinámica
+// ✅ Configuración de CORS temporal (acepta todo para pruebas móviles y CORS)
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Permitir peticiones sin origen (como curl o Postman)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
+  origin: true, // ⛔️ En producción reemplaza con función dinámica basada en allowedOrigins
   credentials: true,
   optionsSuccessStatus: 200
 }
@@ -48,8 +41,9 @@ connectToDatabase()
     app.use('/api', reserveRoute)
     app.use('/api', favouriteRoute)
 
-    app.listen(PORT, '0.0.0.0', () => {
-      console.log(`Servidor corriendo en http://0.0.0.0:${PORT}`)
+    // ✅ Corrección aquí (era 'aapp')
+    app.listen(PORT, () => {
+      console.log(`Servidor corriendo en puerto ${PORT}`)
     })
   })
   .catch((error) => {
