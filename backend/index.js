@@ -49,7 +49,7 @@ connectToDatabase()
     app.use('/api', reserveRoute)
     app.use('/api', favouriteRoute)
 
-    aapp.listen(PORT, '0.0.0.0', () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Servidor corriendo en http://0.0.0.0:${PORT}`)
     })
   })
