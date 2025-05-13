@@ -57,3 +57,7 @@ connectToDatabase()
     console.error('Error al conectar con la base de datos:', error);
     process.exit(1);
   });
+<<<<<<< HEAD
+=======
+
+>>>>>>> b6308a83fb12c1687f392ab002e325641dbd0c54
