@@ -98,7 +98,7 @@ function ReservaView({ nochesAlojamiento, huespedes }) {
       }
 
       try {
-        const response = await fetch('http://localhost:3003/api/reserves', {
+        const response = await fetch('https://littlejapan.onrender.com/api/reserves', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
