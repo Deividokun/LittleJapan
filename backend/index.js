@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3003;
 // Lista de orígenes permitidos
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://little-japan-knih.vercel.app',
+  'https://little-japan-4g3k.vercel.app',
   'https://littlejapan.onrender.com' // 👈 FRONTEND EN RENDER
 ];
 
