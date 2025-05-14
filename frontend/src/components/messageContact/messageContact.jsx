@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-// SuccessMessage.jsx
+
 import React from 'react'
 import './messageContact.css'
 
@@ -32,4 +31,4 @@ function SuccessMessage({ onClose }) {
 }
 
 export default SuccessMessage
->>>>>>> 6b7121764f3a2ed869df2c27959fbe1936b97a74
+
