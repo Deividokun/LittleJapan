@@ -1,13 +1,22 @@
 import React, { useState } from 'react'
+import SuccessMessage from './../../components/messageContact/messageContact'
 import './contactUs.css'
 
 function ContactUs() {
   const [nombre, setNombre] = useState('')
   const [consulta, setConsulta] = useState('')
+  const [mensajeEnviado, setMensajeEnviado] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('Nombre:', nombre, 'Consulta:', consulta)
+    setMensajeEnviado(true)
+    setNombre('')
+    setConsulta('')
+  }
+
+  const cerrarMensaje = () => {
+    setMensajeEnviado(false)
   }
 
   return (
@@ -39,8 +48,11 @@ function ContactUs() {
           Submit Inquiry
         </button>
       </form>
+
+      {mensajeEnviado && <SuccessMessage onClose={cerrarMensaje} />}
     </div>
   )
 }
 
 export default ContactUs
+
