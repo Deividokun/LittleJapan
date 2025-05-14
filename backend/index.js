@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3003;
 // Lista de orígenes permitidos
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://little-japan-knih.vercel.app',
+  'https://little-japan-4g3k.vercel.app',
   'https://littlejapan.onrender.com' // 👈 FRONTEND EN RENDER
 ];
 
@@ -57,7 +57,4 @@ connectToDatabase()
     console.error('Error al conectar con la base de datos:', error);
     process.exit(1);
   });
-<<<<<<< HEAD
-=======
 
->>>>>>> b6308a83fb12c1687f392ab002e325641dbd0c54
